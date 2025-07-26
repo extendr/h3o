@@ -74,7 +74,7 @@ a valid edge ID.
 x <- h3_from_xy(-122, 38, 5)
 
 # find all edges and flatten
-edges <- h3_edges(x) |> 
+edges <- h3_edges(x) |>
   flatten_edges()
 
 # check if they are all edges
@@ -97,10 +97,10 @@ h3_edges_from_strings(c("115e22da7fffffff", "abcd"))
 
 # create a vector of cells
 cells_ids <-c(
-  "85e22da7fffffff", "85e35ad3fffffff", 
-  "85e22daffffffff", "85e35adbfffffff", 
+  "85e22da7fffffff", "85e35ad3fffffff",
+  "85e22daffffffff", "85e35adbfffffff",
   "85e22da3fffffff"
-) 
+)
 
 cells <- h3o::h3_from_strings(cells_ids)
 
