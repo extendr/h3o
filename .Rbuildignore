@@ -10,3 +10,5 @@
 ^src/\.cargo$
 ^src/Makevars$
 ^src/Makevars\.win$
+^\.vscode$
+^src/rust/target$
