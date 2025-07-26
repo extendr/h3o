@@ -9,7 +9,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 SystemRequirements: Cargo (Rust's package manager), rustc >= 1.75
 Imports: 
     rlang,
@@ -18,4 +18,6 @@ Imports:
 Suggests: 
     sf,
     wk
-Config/rextendr/version: 0.3.1.9001
+Config/rextendr/version: 0.4.0.9000
+Depends: 
+    R (>= 4.2)

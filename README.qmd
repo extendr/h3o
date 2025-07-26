@@ -1,0 +1,193 @@
+---
+format: gfm
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+    fig.path: "man/figures/README-"
+    out.width: "100%"
+---
+
+# h3o
+
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/JosiahParry/h3o/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JosiahParry/h3o/actions/workflows/R-CMD-check.yaml)
+
+<!-- badges: end -->
+
+`{h3o}` is a lightweight R package for interacting with [Uber's H3 Geospatial
+Indexing system](https://github.com/uber/h3). The R package uses
+[extendr](https://extendr.github.io/) to wrap the eponymous [h3o Rust
+crate](https://crates.io/crates/h3o), which offers a pure Rust implementation of
+H3, so no linking to Uber’s H3 C library. The package is also intended to work
+with the [`{sf}`](https://github.com/r-spatial/sf) package for geometric
+operations and as a bonus represents the H3 class as
+[`{vctrs}`](https://github.com/r-lib/vctrs), so they work seamlessly within a
+tidyverse workflow.
+
+## Installation
+
+You can install the release version of `{h3o}` from CRAN with:
+
+``` r
+install.packages("h3o")
+```
+
+Or you can install the development version from [GitHub](https://github.com/)
+with:
+
+``` r
+# install.packages("pak")
+pak::pak("JosiahParry/h3o")
+```
+
+## Example
+
+H3 vectors can be created from `POINT` geometry columns (`sfc` objects) defined
+by sf.
+
+```{r}
+#| label: example
+#| warning: false
+library(h3o)
+library(dplyr)
+library(sf)
+library(tibble)
+
+xy <- data.frame(
+  x = runif(100, -5, 10),
+  y = runif(100, 40, 50)
+)
+
+pnts <- st_as_sf(
+  xy,
+  coords = c("x", "y"),
+  crs = 4326
+)
+
+pnts |> mutate(h3 = h3_from_points(geometry, 5))
+```
+
+H3 vectors also have an `st_as_sfc()` method which allows conversion of H3 cell
+indexes into sf `POLYGON`s.
+
+```{r}
+# replace geometry
+h3_cells <- pnts |>
+  mutate(
+    h3 = h3_from_points(geometry, 4),
+    geometry = st_as_sfc(h3)
+  )
+
+# plot the hexagons
+plot(st_geometry(h3_cells))
+```
+
+H3 cell centroids can be returned using `h3_to_points()`. If `sf` is avilable,
+the results will be returned as an `sfc` (sf column) object. Otherwise it will
+return a list of `sfg` (sf geometries).
+
+```{r}
+# fetch h3 column
+h3s <- h3_cells[["h3"]]
+
+# get there centers
+h3_centers <- h3_to_points(h3s)
+
+# plot the hexagons with the centers
+plot(st_geometry(h3_cells))
+plot(h3_centers, pch = 16, add = TRUE, col = "black")
+```
+
+`H3Edge` vectors representing the boundaries of H3 cells can be created with
+`h3_edges()`, `h3_shared_edge_pairwise()`, and `h3_shared_edge_sparse()`.
+
+```{r}
+cell_edges <- h3_edges(h3s[1:3])
+cell_edges
+```
+
+We've created a list of each cell's edges. We can flatten them using
+`flatten_edges()`.
+
+```{r}
+cell_edges <- flatten_edges(cell_edges)
+cell_edges
+```
+
+These can be cast to sfc objects using `st_as_sfc()`.
+
+```{r}
+st_as_sfc(cell_edges)
+```
+
+Additionally, you can get the vertexes of H3 cell indexes using
+`h3_to_vertexes()` which returns an `sfc_MULTIPOINT`.
+
+```{r}
+h3_to_vertexes(h3s)
+```
+
+## Bench marks
+
+Since h3o is written in Rust, it is very fast.
+
+### Creating polygons
+
+```{r}
+h3_strs <- as.character(h3s)
+bench::mark(
+  h3o = st_as_sfc(h3s),
+  h3jsr = h3jsr::cell_to_polygon(h3_strs)
+)
+```
+
+### Converting polygons to H3 cells:
+
+```{r}
+nc <- st_read(system.file("gpkg/nc.gpkg", package = "sf"), quiet = TRUE) |>
+  st_transform(4326) |>
+  st_geometry()
+
+bench::mark(
+  h3o = sfc_to_cells(nc, 5, "centroid"),
+  h3jsr = h3jsr::polygon_to_cells(nc, 5),
+  check = FALSE
+)
+```
+
+### Converting points to cells
+
+```{r}
+bench::mark(
+  h3o = h3_from_points(pnts$geometry, 3),
+  h3jsr = h3jsr::point_to_cell(pnts$geometry, 3),
+  check = FALSE
+)
+```
+
+### Retrieve edges
+
+```{r}
+bench::mark(
+  h3o = h3_edges(h3s),
+  h3jsr = h3jsr::get_udedges(h3_strs),
+  check = FALSE
+)
+```
+
+### Get origins and destinations from edges.
+
+```{r}
+# get edges for a single location
+eds <- h3_edges(h3s[1])[[1]]
+# strings for h3jsr
+eds_str <- as.character(eds)
+
+bench::mark(
+  h3o = h3_edge_cells(eds),
+  h3jsr = h3jsr::get_udends(eds_str),
+  check = FALSE
+)
+```

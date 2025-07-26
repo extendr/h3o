@@ -2,6 +2,7 @@ use extendr_api::prelude::*;
 
 use h3o::CellIndex;
 
+#[extendr]
 #[derive(Debug, Clone, Copy)]
 pub struct H3 {
     pub index: CellIndex,
@@ -28,7 +29,8 @@ pub fn vctrs_class() -> [String; 3] {
 
 #[extendr]
 fn h3_to_strings(x: List) -> Strings {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             //
             let indx = <&H3>::try_from(&robj);

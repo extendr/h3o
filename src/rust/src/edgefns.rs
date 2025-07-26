@@ -28,7 +28,8 @@ fn is_nb_pairwise_(x: List, y: List) -> Logicals {
 
 #[extendr]
 fn is_nb_sparse_(x: List, y: List) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, x)| {
             if x.is_null() {
                 Logicals::new(1)
@@ -57,7 +58,8 @@ fn is_nb_sparse_(x: List, y: List) -> List {
 
 #[extendr]
 fn h3_edges_pairwise_(x: List, y: List) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .zip(y.into_iter())
         .map(|((_, x), (_, y))| {
             if x.is_null() || y.is_null() {
@@ -84,14 +86,16 @@ fn h3_edges_pairwise_(x: List, y: List) -> List {
 
 #[extendr]
 fn h3_edges_sparse_(x: List, y: List) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, x)| {
             if x.is_null() {
                 list!().set_class(edge_vctrs()).unwrap().clone()
             } else {
                 let xh3 = <&H3>::try_from(&x).unwrap().index;
 
-                let r = y.iter()
+                let r = y
+                    .iter()
                     .map(|(_, y)| {
                         let yh3 = <&H3>::try_from(&y).unwrap().index;
                         let res = xh3.edge(yh3);
@@ -132,7 +136,8 @@ fn is_valid_edge_(x: Strings) -> Logicals {
 
 #[extendr]
 fn h3_edge_from_strings_(x: Strings) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|x| {
             let x_na = x.is_na();
             if !x_na {
@@ -149,12 +154,14 @@ fn h3_edge_from_strings_(x: Strings) -> List {
 
     List::from_values(res)
         .set_class(edge_vctrs())
-        .unwrap().clone()
+        .unwrap()
+        .clone()
 }
 
 #[extendr]
 fn get_directed_origin_(x: List) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             //Robj::from(H3::from(H3DEdge::from(robj).edge.origin()))
             let res = <&H3DEdge>::try_from(&robj);
@@ -168,12 +175,14 @@ fn get_directed_origin_(x: List) -> List {
 
     List::from_values(res)
         .set_class(vctrs_class())
-        .unwrap().clone()
+        .unwrap()
+        .clone()
 }
 
 #[extendr]
 fn get_directed_destination_(x: List) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             //Robj::from(H3::from(H3DEdge::from(robj).edge.origin()))
             let res = <&H3DEdge>::try_from(&robj);
@@ -186,12 +195,14 @@ fn get_directed_destination_(x: List) -> List {
 
     List::from_values(res)
         .set_class(vctrs_class())
-        .unwrap().clone()
+        .unwrap()
+        .clone()
 }
 
 #[extendr]
 fn get_directed_cells_(x: List) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             //Robj::from(H3::from(H3DEdge::from(robj).edge.origin()))
             let res = <&H3DEdge>::try_from(&robj);
@@ -203,7 +214,9 @@ fn get_directed_cells_(x: List) -> List {
                         .set_attrib("names", ["origin", "destination"])
                         .unwrap()
                         .set_class(vctrs_class())
-                        .unwrap().clone().into_robj()
+                        .unwrap()
+                        .clone()
+                        .into_robj()
                 }
                 Err(_) => Robj::from(extendr_api::NULL),
             }
@@ -215,18 +228,19 @@ fn get_directed_cells_(x: List) -> List {
 
 #[extendr]
 fn h3_edges_(x: List) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             if robj.is_null() {
                 list!().set_class(edge_vctrs()).unwrap().clone()
             } else {
                 let eds = <&H3>::try_from(&robj).unwrap().index.edges();
-                let res = eds.map(|ed| H3DEdge { edge: ed })
-                    .collect::<Vec<H3DEdge>>();
+                let res = eds.map(|ed| H3DEdge { edge: ed }).collect::<Vec<H3DEdge>>();
 
                 List::from_values(res)
                     .set_class(edge_vctrs())
-                    .unwrap().clone()
+                    .unwrap()
+                    .clone()
             }
         })
         .collect::<Vec<List>>();
@@ -236,7 +250,8 @@ fn h3_edges_(x: List) -> List {
 
 #[extendr]
 fn edge_boundary_(x: List) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             let res = <&H3DEdge>::try_from(&robj);
             match res {
@@ -254,11 +269,12 @@ fn edge_boundary_(x: List) -> List {
 
                 Err(_) => RMatrix::new_matrix(0, 2, |_r, _c| 0)
                     .set_class(["XY", "LINESTRING", "sfg"])
-                    .unwrap().clone(),
+                    .unwrap()
+                    .clone(),
             }
         })
         .collect::<Vec<Robj>>();
-    
+
     List::from_values(res)
 }
 
@@ -282,6 +298,7 @@ extendr_module! {
 
 // H3DEdge implementation. Defines a struct to be used for directed edges
 // a list of H3DEdges is a H3Edge vector.
+#[extendr]
 #[derive(Debug, Clone, Copy)]
 pub struct H3DEdge {
     pub edge: DirectedEdgeIndex,
@@ -320,7 +337,8 @@ impl From<DirectedEdgeIndex> for H3DEdge {
 
 #[extendr]
 fn edges_to_strings(x: List) -> Strings {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             //
             let indx = <&H3DEdge>::try_from(&robj);

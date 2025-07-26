@@ -23,11 +23,11 @@ Test if two H3 cells are neighbors.
 }
 \examples{
 cells_ids <-c(
-  "85e22da7fffffff", "85e35ad3fffffff", 
-  "85e22daffffffff", "85e35adbfffffff", 
+  "85e22da7fffffff", "85e35ad3fffffff",
+  "85e22daffffffff", "85e35adbfffffff",
   "85e22db7fffffff", "85e35e6bfffffff",
   "85e22da3fffffff"
-) 
+)
 
 cells <- h3o::h3_from_strings(cells_ids)
 
