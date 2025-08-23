@@ -1,9 +1,12 @@
 Package: h3o
 Title: H3 Geospatial Indexing System
 Version: 0.2.3
-Authors@R: 
-    person("Josiah", "Parry", , "josiah.parry@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0001-9910-865X"))
+Authors@R: c(
+    person("Josiah", "Parry", , "josiah.parry@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0001-9910-865X")),
+    person("Kenneth", "Vernon", , "kenneth.b.vernon@gmail.com", role = c("cre", "ctb"),
+           comment = c(ORCID = "0000-0003-0098-5092"))
+    )
 Description: A dependency free interface to the H3 geospatial indexing system utilizing the Rust library 'h3o' <https://github.com/HydroniumLabs/h3o> via the 'extendr' library <https://github.com/extendr/extendr>.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -21,3 +24,5 @@ Suggests:
 Config/rextendr/version: 0.4.0.9000
 Depends: 
     R (>= 4.2)
+URL: https://github.com/extendr/h3o, https://extendr.github.io/h3o/
+BugReports: https://github.com/extendr/h3o/issues
