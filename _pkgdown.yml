@@ -1,0 +1,7 @@
+url: https://extendr.github.io/h3o/
+template:
+  bootstrap: 5
+
+navbar:
+  structure:
+    right:  [github]

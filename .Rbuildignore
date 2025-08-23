@@ -12,3 +12,8 @@
 ^src/Makevars\.win$
 ^\.vscode$
 ^src/rust/target$
+^_pkgdown\.yml$
+^pkgdown$
+[.]qmd$
+^cran-comments\.md$
+^CRAN-SUBMISSION$
