@@ -2,7 +2,7 @@ Package: h3o
 Title: H3 Geospatial Indexing System
 Version: 0.2.3
 Authors@R: c(
-    person("Josiah", "Parry", , "josiah.parry@gmail.com", role = "aut",
+    person("Josiah", "Parry", , "josiah.parry@gmail.com", role = c("aut", "cph"),
            comment = c(ORCID = "0000-0001-9910-865X")),
     person("Kenneth", "Vernon", , "kenneth.b.vernon@gmail.com", role = c("cre", "ctb"),
            comment = c(ORCID = "0000-0003-0098-5092"))
