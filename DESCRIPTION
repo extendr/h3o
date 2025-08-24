@@ -24,5 +24,5 @@ Suggests:
 Config/rextendr/version: 0.4.0.9000
 Depends: 
     R (>= 4.2)
-URL: https://github.com/extendr/h3o, https://extendr.github.io/h3o/
+URL: https://github.com/extendr/h3o, https://extendr.rs/h3o/
 BugReports: https://github.com/extendr/h3o/issues
