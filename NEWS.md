@@ -1,5 +1,7 @@
 # development 
 
+# h3o 0.3.0
+- Now on CRAN
 - `"covers"` containment mode is now supported
 - `to_cells()` is renamed `sfc_to_cells()`
 - h3o dependency is bumped to version 0.4.0

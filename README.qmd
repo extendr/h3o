@@ -11,14 +11,14 @@ knitr:
 # h3o
 
 <!-- badges: start -->
-
-[![R-CMD-check](https://github.com/JosiahParry/h3o/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JosiahParry/h3o/actions/workflows/R-CMD-check.yaml)
-
+[![R-CMD-check](https://github.com/extendr/h3o/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/extendr/h3o/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/h3o)](https://CRAN.R-project.org/package=h3o)
+[![extendr](https://img.shields.io/badge/extendr-^0.8.0-276DC2)](https://extendr.rs/extendr/extendr_api/)
 <!-- badges: end -->
 
 `{h3o}` is a lightweight R package for interacting with [Uber's H3 Geospatial
 Indexing system](https://github.com/uber/h3). The R package uses
-[extendr](https://extendr.github.io/) to wrap the eponymous [h3o Rust
+[extendr](https://extendr.rs/) to wrap the eponymous [h3o Rust
 crate](https://crates.io/crates/h3o), which offers a pure Rust implementation of
 H3, so no linking to Uber’s H3 C library. The package is also intended to work
 with the [`{sf}`](https://github.com/r-spatial/sf) package for geometric
@@ -39,7 +39,7 @@ with:
 
 ``` r
 # install.packages("pak")
-pak::pak("JosiahParry/h3o")
+pak::pak("extendr/h3o")
 ```
 
 ## Example

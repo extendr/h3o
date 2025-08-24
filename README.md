@@ -4,14 +4,16 @@
 
 <!-- badges: start -->
 
-[![](https://github.com/JosiahParry/h3o/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JosiahParry/h3o/actions/workflows/R-CMD-check.yaml)
-
+[![R-CMD-check](https://github.com/extendr/h3o/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/extendr/h3o/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/h3o.png)](https://CRAN.R-project.org/package=h3o)
+[![extendr](https://img.shields.io/badge/extendr-%5E0.8.0-276DC2)](https://extendr.rs/extendr/extendr_api/)
 <!-- badges: end -->
 
 `{h3o}` is a lightweight R package for interacting with [Uber’s H3
 Geospatial Indexing system](https://github.com/uber/h3). The R package
-uses [extendr](https://extendr.github.io/) to wrap the eponymous [h3o
-Rust crate](https://crates.io/crates/h3o), which offers a pure Rust
+uses [extendr](https://extendr.rs/) to wrap the eponymous [h3o Rust
+crate](https://crates.io/crates/h3o), which offers a pure Rust
 implementation of H3, so no linking to Uber’s H3 C library. The package
 is also intended to work with the
 [`{sf}`](https://github.com/r-spatial/sf) package for geometric
@@ -32,7 +34,7 @@ Or you can install the development version from
 
 ``` r
 # install.packages("pak")
-pak::pak("JosiahParry/h3o")
+pak::pak("extendr/h3o")
 ```
 
 ## Example
@@ -61,20 +63,20 @@ pnts |> mutate(h3 = h3_from_points(geometry, 5))
 #> Simple feature collection with 100 features and 1 field
 #> Geometry type: POINT
 #> Dimension:     XY
-#> Bounding box:  xmin: -4.687389 ymin: 40.09688 xmax: 9.911612 ymax: 49.97784
+#> Bounding box:  xmin: -4.906456 ymin: 40.13608 xmax: 9.720642 ymax: 49.77958
 #> Geodetic CRS:  WGS 84
 #> First 10 features:
-#>                      geometry              h3
-#> 1   POINT (4.504552 45.26616) 851f93d7fffffff
-#> 2   POINT (1.816329 40.94935) 853946abfffffff
-#> 3  POINT (-2.147328 46.43598) 85184183fffffff
-#> 4   POINT (3.260273 41.34728) 853940a3fffffff
-#> 5   POINT (-1.50323 46.38411) 85186a53fffffff
-#> 6  POINT (0.1499664 42.05342) 85397567fffffff
-#> 7   POINT (4.900316 41.40955) 85394cdbfffffff
-#> 8  POINT (-1.195541 46.94178) 85186e6bfffffff
-#> 9   POINT (9.911612 49.19627) 851faa37fffffff
-#> 10 POINT (-3.434653 45.27516) 85184ecffffffff
+#>                       geometry              h3
+#> 1    POINT (6.604776 48.68961) 851f8423fffffff
+#> 2  POINT (-0.6574923 40.42394) 85397237fffffff
+#> 3   POINT (-4.327095 46.43766) 851843dbfffffff
+#> 4    POINT (2.098711 40.28164) 85394283fffffff
+#> 5    POINT (8.558989 44.79674) 851f9bd7fffffff
+#> 6   POINT (-2.064705 47.93067) 8518637bfffffff
+#> 7    POINT (7.966344 47.88122) 851f8143fffffff
+#> 8    POINT (-1.18493 48.41385) 85186383fffffff
+#> 9   POINT (0.2382595 43.76685) 8539668ffffffff
+#> 10  POINT (0.2054317 48.94255) 85186573fffffff
 ```
 
 H3 vectors also have an `st_as_sfc()` method which allows conversion of
@@ -123,18 +125,18 @@ cell_edges <- h3_edges(h3s[1:3])
 cell_edges
 #> [[1]]
 #> <H3Edge[6]>
-#> [1] 1141f93dffffffff 1241f93dffffffff 1341f93dffffffff 1441f93dffffffff
-#> [5] 1541f93dffffffff 1641f93dffffffff
+#> [1] 1141f843ffffffff 1241f843ffffffff 1341f843ffffffff 1441f843ffffffff
+#> [5] 1541f843ffffffff 1641f843ffffffff
 #> 
 #> [[2]]
 #> <H3Edge[6]>
-#> [1] 1143946bffffffff 1243946bffffffff 1343946bffffffff 1443946bffffffff
-#> [5] 1543946bffffffff 1643946bffffffff
+#> [1] 11439723ffffffff 12439723ffffffff 13439723ffffffff 14439723ffffffff
+#> [5] 15439723ffffffff 16439723ffffffff
 #> 
 #> [[3]]
 #> <H3Edge[6]>
-#> [1] 11418419ffffffff 12418419ffffffff 13418419ffffffff 14418419ffffffff
-#> [5] 15418419ffffffff 16418419ffffffff
+#> [1] 1141843dffffffff 1241843dffffffff 1341843dffffffff 1441843dffffffff
+#> [5] 1541843dffffffff 1641843dffffffff
 ```
 
 We’ve created a list of each cell’s edges. We can flatten them using
@@ -144,11 +146,11 @@ We’ve created a list of each cell’s edges. We can flatten them using
 cell_edges <- flatten_edges(cell_edges)
 cell_edges
 #> <H3Edge[18]>
-#>  [1] 1141f93dffffffff 1241f93dffffffff 1341f93dffffffff 1441f93dffffffff
-#>  [5] 1541f93dffffffff 1641f93dffffffff 1143946bffffffff 1243946bffffffff
-#>  [9] 1343946bffffffff 1443946bffffffff 1543946bffffffff 1643946bffffffff
-#> [13] 11418419ffffffff 12418419ffffffff 13418419ffffffff 14418419ffffffff
-#> [17] 15418419ffffffff 16418419ffffffff
+#>  [1] 1141f843ffffffff 1241f843ffffffff 1341f843ffffffff 1441f843ffffffff
+#>  [5] 1541f843ffffffff 1641f843ffffffff 11439723ffffffff 12439723ffffffff
+#>  [9] 13439723ffffffff 14439723ffffffff 15439723ffffffff 16439723ffffffff
+#> [13] 1141843dffffffff 1241843dffffffff 1341843dffffffff 1441843dffffffff
+#> [17] 1541843dffffffff 1641843dffffffff
 ```
 
 These can be cast to sfc objects using `st_as_sfc()`.
@@ -158,14 +160,14 @@ st_as_sfc(cell_edges)
 #> Geometry set for 18 features 
 #> Geometry type: LINESTRING
 #> Dimension:     XY
-#> Bounding box:  xmin: -2.518472 ymin: 40.84516 xmax: 4.818449 ymax: 46.60887
+#> Bounding box:  xmin: -4.577141 ymin: 40.10303 xmax: 6.908627 ymax: 48.92561
 #> Geodetic CRS:  WGS 84
 #> First 5 geometries:
-#> LINESTRING (4.748771 44.94225, 4.818449 45.17055)
-#> LINESTRING (4.201051 44.99631, 4.440499 44.85539)
-#> LINESTRING (4.440499 44.85539, 4.748771 44.94225)
-#> LINESTRING (4.578042 45.31175, 4.268915 45.22437)
-#> LINESTRING (4.818449 45.17055, 4.578042 45.31175)
+#> LINESTRING (6.828196 48.56718, 6.908627 48.78762)
+#> LINESTRING (6.24713 48.62253, 6.49798 48.48486)
+#> LINESTRING (6.49798 48.48486, 6.828196 48.56718)
+#> LINESTRING (6.656859 48.92561, 6.325574 48.84283)
+#> LINESTRING (6.908627 48.78762, 6.656859 48.92561)
 ```
 
 Additionally, you can get the vertexes of H3 cell indexes using
@@ -176,14 +178,14 @@ h3_to_vertexes(h3s)
 #> Geometry set for 100 features 
 #> Geometry type: MULTIPOINT
 #> Dimension:     XY
-#> Bounding box:  xmin: -5.049869 ymin: 39.94716 xmax: 10.37721 ymax: 50.35027
+#> Bounding box:  xmin: -5.162291 ymin: 40.02598 xmax: 10.1164 ymax: 50.08041
 #> Geodetic CRS:  WGS 84
 #> First 5 geometries:
-#> MULTIPOINT ((4.268915 45.22437), (4.201051 44.9...
-#> MULTIPOINT ((1.563896 41.22113), (1.508041 40.9...
-#> MULTIPOINT ((-2.164091 46.60887), (-2.470648 46...
-#> MULTIPOINT ((2.941338 41.43962), (2.880845 41.2...
-#> MULTIPOINT ((-1.602187 46.52355), (-1.907502 46...
+#> MULTIPOINT ((6.325574 48.84283), (6.24713 48.62...
+#> MULTIPOINT ((-0.6690999 40.57641), (-0.9475784 ...
+#> MULTIPOINT ((-4.227092 46.53696), (-4.535994 46...
+#> MULTIPOINT ((1.905903 40.46739), (1.849434 40.2...
+#> MULTIPOINT ((8.142693 44.78613), (8.062234 44.5...
 ```
 
 ## Bench marks
@@ -201,8 +203,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 h3o         432.3µs  477.7µs     1972.    9.85KB     14.6
-#> 2 h3jsr        8.19ms   8.83ms      110.    2.69MB     89.4
+#> 1 h3o         462.6µs  505.7µs     1863.    9.85KB     14.6
+#> 2 h3jsr        8.34ms   9.36ms      106.     2.7MB     90.0
 ```
 
 ### Converting polygons to H3 cells:
@@ -220,8 +222,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 h3o          4.96ms   5.29ms     185.     21.4KB    11.2 
-#> 2 h3jsr       28.79ms   29.5ms      33.8   748.7KB     5.19
+#> 1 h3o           4.8ms   5.35ms     183.     21.4KB    11.3 
+#> 2 h3jsr        27.6ms  28.51ms      34.8   748.7KB     4.97
 ```
 
 ### Converting points to cells
@@ -235,8 +237,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 h3o         105.2µs  124.5µs     7114.      848B    11.7 
-#> 2 h3jsr        2.57ms   2.96ms      329.     975KB     8.49
+#> 1 h3o         103.4µs  123.3µs     7372.      848B     11.4
+#> 2 h3jsr        2.63ms   3.04ms      326.     975KB     13.3
 ```
 
 ### Retrieve edges
@@ -250,8 +252,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 h3o         351.7µs  509.5µs     1674.      848B     13.1
-#> 2 h3jsr        1.72ms   2.88ms      363.    67.9KB     16.2
+#> 1 h3o         403.5µs  530.3µs     1593.      848B     16.9
+#> 2 h3jsr        1.64ms   1.76ms      555.    67.9KB     17.3
 ```
 
 ### Get origins and destinations from edges.
@@ -270,6 +272,6 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 h3o          14.3µs     22µs    40992.    7.86KB     16.4
-#> 2 h3jsr       646.1µs    741µs     1250.   19.82KB     15.4
+#> 1 h3o          12.9µs   18.1µs    49775.    7.86KB     19.9
+#> 2 h3jsr       631.3µs  740.1µs     1248.   19.82KB     12.9
 ```
