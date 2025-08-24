@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">h3o</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,8 +48,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<!-- badges: end -->
-<p><a href="https://github.com/extendr/h3o" class="external-link">h3o</a> is a lightweight R package for interacting with <a href="https://github.com/uber/h3" class="external-link">Uber’s H3 Geospatial Indexing system</a>. The R package uses <a href="https://extendr.github.io/" class="external-link">extendr</a> to wrap the eponymous <a href="https://crates.io/crates/h3o" class="external-link">h3o Rust crate</a>, which offers a pure Rust implementation of H3, so no linking to Uber’s H3 C library. The package is also intended to work with the <a href="https://github.com/r-spatial/sf" class="external-link"><code>{sf}</code></a> package for geometric operations and as a bonus represents the H3 class as <a href="https://github.com/r-lib/vctrs" class="external-link"><code>{vctrs}</code></a>, so they work seamlessly within a tidyverse workflow.</p>
+<p><a href="https://github.com/extendr/h3o" class="external-link">h3o</a> is a lightweight R package for interacting with <a href="https://github.com/uber/h3" class="external-link">Uber’s H3 Geospatial Indexing system</a>. The R package uses <a href="https://extendr.rs/" class="external-link">extendr</a> to wrap the eponymous <a href="https://crates.io/crates/h3o" class="external-link">h3o Rust crate</a>, which offers a pure Rust implementation of H3, so no linking to Uber’s H3 C library. The package is also intended to work with the <a href="https://github.com/r-spatial/sf" class="external-link"><code>{sf}</code></a> package for geometric operations and as a bonus represents the H3 class as <a href="https://github.com/r-lib/vctrs" class="external-link"><code>{vctrs}</code></a>, so they work seamlessly within a tidyverse workflow.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -59,7 +58,7 @@
 <p>Or you can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"JosiahParry/h3o"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"extendr/h3o"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -86,20 +85,20 @@
 <span><span class="co">#&gt; Simple feature collection with 100 features and 1 field</span></span>
 <span><span class="co">#&gt; Geometry type: POINT</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -4.687389 ymin: 40.09688 xmax: 9.911612 ymax: 49.97784</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -4.906456 ymin: 40.13608 xmax: 9.720642 ymax: 49.77958</span></span>
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
 <span><span class="co">#&gt; First 10 features:</span></span>
-<span><span class="co">#&gt;                      geometry              h3</span></span>
-<span><span class="co">#&gt; 1   POINT (4.504552 45.26616) 851f93d7fffffff</span></span>
-<span><span class="co">#&gt; 2   POINT (1.816329 40.94935) 853946abfffffff</span></span>
-<span><span class="co">#&gt; 3  POINT (-2.147328 46.43598) 85184183fffffff</span></span>
-<span><span class="co">#&gt; 4   POINT (3.260273 41.34728) 853940a3fffffff</span></span>
-<span><span class="co">#&gt; 5   POINT (-1.50323 46.38411) 85186a53fffffff</span></span>
-<span><span class="co">#&gt; 6  POINT (0.1499664 42.05342) 85397567fffffff</span></span>
-<span><span class="co">#&gt; 7   POINT (4.900316 41.40955) 85394cdbfffffff</span></span>
-<span><span class="co">#&gt; 8  POINT (-1.195541 46.94178) 85186e6bfffffff</span></span>
-<span><span class="co">#&gt; 9   POINT (9.911612 49.19627) 851faa37fffffff</span></span>
-<span><span class="co">#&gt; 10 POINT (-3.434653 45.27516) 85184ecffffffff</span></span></code></pre></div>
+<span><span class="co">#&gt;                       geometry              h3</span></span>
+<span><span class="co">#&gt; 1    POINT (6.604776 48.68961) 851f8423fffffff</span></span>
+<span><span class="co">#&gt; 2  POINT (-0.6574923 40.42394) 85397237fffffff</span></span>
+<span><span class="co">#&gt; 3   POINT (-4.327095 46.43766) 851843dbfffffff</span></span>
+<span><span class="co">#&gt; 4    POINT (2.098711 40.28164) 85394283fffffff</span></span>
+<span><span class="co">#&gt; 5    POINT (8.558989 44.79674) 851f9bd7fffffff</span></span>
+<span><span class="co">#&gt; 6   POINT (-2.064705 47.93067) 8518637bfffffff</span></span>
+<span><span class="co">#&gt; 7    POINT (7.966344 47.88122) 851f8143fffffff</span></span>
+<span><span class="co">#&gt; 8    POINT (-1.18493 48.41385) 85186383fffffff</span></span>
+<span><span class="co">#&gt; 9   POINT (0.2382595 43.76685) 8539668ffffffff</span></span>
+<span><span class="co">#&gt; 10  POINT (0.2054317 48.94255) 85186573fffffff</span></span></code></pre></div>
 <p>H3 vectors also have an <code><a href="https://r-spatial.github.io/sf/reference/st_as_sfc.html" class="external-link">st_as_sfc()</a></code> method which allows conversion of H3 cell indexes into sf <code>POLYGON</code>s.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># replace geometry</span></span>
@@ -130,56 +129,56 @@
 <span><span class="va">cell_edges</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; &lt;H3Edge[6]&gt;</span></span>
-<span><span class="co">#&gt; [1] 1141f93dffffffff 1241f93dffffffff 1341f93dffffffff 1441f93dffffffff</span></span>
-<span><span class="co">#&gt; [5] 1541f93dffffffff 1641f93dffffffff</span></span>
+<span><span class="co">#&gt; [1] 1141f843ffffffff 1241f843ffffffff 1341f843ffffffff 1441f843ffffffff</span></span>
+<span><span class="co">#&gt; [5] 1541f843ffffffff 1641f843ffffffff</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; &lt;H3Edge[6]&gt;</span></span>
-<span><span class="co">#&gt; [1] 1143946bffffffff 1243946bffffffff 1343946bffffffff 1443946bffffffff</span></span>
-<span><span class="co">#&gt; [5] 1543946bffffffff 1643946bffffffff</span></span>
+<span><span class="co">#&gt; [1] 11439723ffffffff 12439723ffffffff 13439723ffffffff 14439723ffffffff</span></span>
+<span><span class="co">#&gt; [5] 15439723ffffffff 16439723ffffffff</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; &lt;H3Edge[6]&gt;</span></span>
-<span><span class="co">#&gt; [1] 11418419ffffffff 12418419ffffffff 13418419ffffffff 14418419ffffffff</span></span>
-<span><span class="co">#&gt; [5] 15418419ffffffff 16418419ffffffff</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1141843dffffffff 1241843dffffffff 1341843dffffffff 1441843dffffffff</span></span>
+<span><span class="co">#&gt; [5] 1541843dffffffff 1641843dffffffff</span></span></code></pre></div>
 <p>We’ve created a list of each cell’s edges. We can flatten them using <code><a href="reference/edges.html">flatten_edges()</a></code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cell_edges</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/edges.html">flatten_edges</a></span><span class="op">(</span><span class="va">cell_edges</span><span class="op">)</span></span>
 <span><span class="va">cell_edges</span></span>
 <span><span class="co">#&gt; &lt;H3Edge[18]&gt;</span></span>
-<span><span class="co">#&gt;  [1] 1141f93dffffffff 1241f93dffffffff 1341f93dffffffff 1441f93dffffffff</span></span>
-<span><span class="co">#&gt;  [5] 1541f93dffffffff 1641f93dffffffff 1143946bffffffff 1243946bffffffff</span></span>
-<span><span class="co">#&gt;  [9] 1343946bffffffff 1443946bffffffff 1543946bffffffff 1643946bffffffff</span></span>
-<span><span class="co">#&gt; [13] 11418419ffffffff 12418419ffffffff 13418419ffffffff 14418419ffffffff</span></span>
-<span><span class="co">#&gt; [17] 15418419ffffffff 16418419ffffffff</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 1141f843ffffffff 1241f843ffffffff 1341f843ffffffff 1441f843ffffffff</span></span>
+<span><span class="co">#&gt;  [5] 1541f843ffffffff 1641f843ffffffff 11439723ffffffff 12439723ffffffff</span></span>
+<span><span class="co">#&gt;  [9] 13439723ffffffff 14439723ffffffff 15439723ffffffff 16439723ffffffff</span></span>
+<span><span class="co">#&gt; [13] 1141843dffffffff 1241843dffffffff 1341843dffffffff 1441843dffffffff</span></span>
+<span><span class="co">#&gt; [17] 1541843dffffffff 1641843dffffffff</span></span></code></pre></div>
 <p>These can be cast to sfc objects using <code><a href="https://r-spatial.github.io/sf/reference/st_as_sfc.html" class="external-link">st_as_sfc()</a></code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sfc.html" class="external-link">st_as_sfc</a></span><span class="op">(</span><span class="va">cell_edges</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Geometry set for 18 features </span></span>
 <span><span class="co">#&gt; Geometry type: LINESTRING</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -2.518472 ymin: 40.84516 xmax: 4.818449 ymax: 46.60887</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -4.577141 ymin: 40.10303 xmax: 6.908627 ymax: 48.92561</span></span>
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
 <span><span class="co">#&gt; First 5 geometries:</span></span>
-<span><span class="co">#&gt; LINESTRING (4.748771 44.94225, 4.818449 45.17055)</span></span>
-<span><span class="co">#&gt; LINESTRING (4.201051 44.99631, 4.440499 44.85539)</span></span>
-<span><span class="co">#&gt; LINESTRING (4.440499 44.85539, 4.748771 44.94225)</span></span>
-<span><span class="co">#&gt; LINESTRING (4.578042 45.31175, 4.268915 45.22437)</span></span>
-<span><span class="co">#&gt; LINESTRING (4.818449 45.17055, 4.578042 45.31175)</span></span></code></pre></div>
+<span><span class="co">#&gt; LINESTRING (6.828196 48.56718, 6.908627 48.78762)</span></span>
+<span><span class="co">#&gt; LINESTRING (6.24713 48.62253, 6.49798 48.48486)</span></span>
+<span><span class="co">#&gt; LINESTRING (6.49798 48.48486, 6.828196 48.56718)</span></span>
+<span><span class="co">#&gt; LINESTRING (6.656859 48.92561, 6.325574 48.84283)</span></span>
+<span><span class="co">#&gt; LINESTRING (6.908627 48.78762, 6.656859 48.92561)</span></span></code></pre></div>
 <p>Additionally, you can get the vertexes of H3 cell indexes using <code><a href="reference/H3.html">h3_to_vertexes()</a></code> which returns an <code>sfc_MULTIPOINT</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/H3.html">h3_to_vertexes</a></span><span class="op">(</span><span class="va">h3s</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Geometry set for 100 features </span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOINT</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -5.049869 ymin: 39.94716 xmax: 10.37721 ymax: 50.35027</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -5.162291 ymin: 40.02598 xmax: 10.1164 ymax: 50.08041</span></span>
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
 <span><span class="co">#&gt; First 5 geometries:</span></span>
-<span><span class="co">#&gt; MULTIPOINT ((4.268915 45.22437), (4.201051 44.9...</span></span>
-<span><span class="co">#&gt; MULTIPOINT ((1.563896 41.22113), (1.508041 40.9...</span></span>
-<span><span class="co">#&gt; MULTIPOINT ((-2.164091 46.60887), (-2.470648 46...</span></span>
-<span><span class="co">#&gt; MULTIPOINT ((2.941338 41.43962), (2.880845 41.2...</span></span>
-<span><span class="co">#&gt; MULTIPOINT ((-1.602187 46.52355), (-1.907502 46...</span></span></code></pre></div>
+<span><span class="co">#&gt; MULTIPOINT ((6.325574 48.84283), (6.24713 48.62...</span></span>
+<span><span class="co">#&gt; MULTIPOINT ((-0.6690999 40.57641), (-0.9475784 ...</span></span>
+<span><span class="co">#&gt; MULTIPOINT ((-4.227092 46.53696), (-4.535994 46...</span></span>
+<span><span class="co">#&gt; MULTIPOINT ((1.905903 40.46739), (1.849434 40.2...</span></span>
+<span><span class="co">#&gt; MULTIPOINT ((8.142693 44.78613), (8.062234 44.5...</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="bench-marks">Bench marks<a class="anchor" aria-label="anchor" href="#bench-marks"></a>
@@ -197,8 +196,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 h3o         432.3µs  477.7µs     1972.    9.85KB     14.6</span></span>
-<span><span class="co">#&gt; 2 h3jsr        8.19ms   8.83ms      110.    2.69MB     89.4</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 h3o         462.6µs  505.7µs     1863.    9.85KB     14.6</span></span>
+<span><span class="co">#&gt; 2 h3jsr        8.34ms   9.36ms      106.     2.7MB     90.0</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="converting-polygons-to-h3-cells">Converting polygons to H3 cells:<a class="anchor" aria-label="anchor" href="#converting-polygons-to-h3-cells"></a>
@@ -216,8 +215,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 h3o          4.96ms   5.29ms     185.     21.4KB    11.2 </span></span>
-<span><span class="co">#&gt; 2 h3jsr       28.79ms   29.5ms      33.8   748.7KB     5.19</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 h3o           4.8ms   5.35ms     183.     21.4KB    11.3 </span></span>
+<span><span class="co">#&gt; 2 h3jsr        27.6ms  28.51ms      34.8   748.7KB     4.97</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="converting-points-to-cells">Converting points to cells<a class="anchor" aria-label="anchor" href="#converting-points-to-cells"></a>
@@ -231,8 +230,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 h3o         105.2µs  124.5µs     7114.      848B    11.7 </span></span>
-<span><span class="co">#&gt; 2 h3jsr        2.57ms   2.96ms      329.     975KB     8.49</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 h3o         103.4µs  123.3µs     7372.      848B     11.4</span></span>
+<span><span class="co">#&gt; 2 h3jsr        2.63ms   3.04ms      326.     975KB     13.3</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="retrieve-edges">Retrieve edges<a class="anchor" aria-label="anchor" href="#retrieve-edges"></a>
@@ -246,8 +245,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 h3o         351.7µs  509.5µs     1674.      848B     13.1</span></span>
-<span><span class="co">#&gt; 2 h3jsr        1.72ms   2.88ms      363.    67.9KB     16.2</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 h3o         403.5µs  530.3µs     1593.      848B     16.9</span></span>
+<span><span class="co">#&gt; 2 h3jsr        1.64ms   1.76ms      555.    67.9KB     17.3</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="get-origins-and-destinations-from-edges">Get origins and destinations from edges.<a class="anchor" aria-label="anchor" href="#get-origins-and-destinations-from-edges"></a>
@@ -266,8 +265,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 h3o          14.3µs     22µs    40992.    7.86KB     16.4</span></span>
-<span><span class="co">#&gt; 2 h3jsr       646.1µs    741µs     1250.   19.82KB     15.4</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 h3o          12.9µs   18.1µs    49775.    7.86KB     19.9</span></span>
+<span><span class="co">#&gt; 2 h3jsr       631.3µs  740.1µs     1248.   19.82KB     12.9</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -298,7 +297,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Josiah Parry <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-9910-865X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Josiah Parry <br><small class="roles"> Author, copyright holder </small> <a href="https://orcid.org/0000-0001-9910-865X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>Kenneth Vernon <br><small class="roles"> Maintainer, contributor </small> <a href="https://orcid.org/0000-0003-0098-5092" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
@@ -306,7 +305,9 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/JosiahParry/h3o/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/JosiahParry/h3o/actions/workflows/R-CMD-check.yaml/badge.svg"></a></li>
+<li><a href="https://github.com/extendr/h3o/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/extendr/h3o/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://CRAN.R-project.org/package=h3o" class="external-link"><img src="https://www.r-pkg.org/badges/version/h3o.png" alt="CRAN status"></a></li>
+<li><a href="https://extendr.rs/extendr/extendr_api/" class="external-link"><img src="https://img.shields.io/badge/extendr-%5E0.8.0-276DC2" alt="extendr"></a></li>
 </ul>
 </div>
 
