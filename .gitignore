@@ -6,3 +6,4 @@ src/Makevars.win
 /.quarto/
 /.vscode/
 /docs/
+cran-comments.md
