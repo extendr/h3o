@@ -6,6 +6,7 @@ knitr:
     comment: "#>"
     fig.path: "man/figures/README-"
     out.width: "100%"
+default-image-extension: ""
 ---
 
 # h3o
