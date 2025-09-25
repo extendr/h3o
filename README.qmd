@@ -9,7 +9,7 @@ knitr:
 default-image-extension: ""
 ---
 
-# h3o
+# h3o <a href="https://extendr.rs/h3o/"><img src="man/figures/logo.svg" align="right" height="138"/></a>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/extendr/h3o/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/extendr/h3o/actions/workflows/R-CMD-check.yaml)
