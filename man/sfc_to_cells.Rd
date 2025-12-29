@@ -11,8 +11,8 @@ sfc_to_cells(x, resolution, containment = "intersect")
 
 \item{resolution}{an integer indicating the H3 cell resolution. Must be between 0 and 15 inclusive.}
 
-\item{containment}{default \code{"intersect"}. Must be one of \code{"intersect"},
-\code{"centroid"}, or \code{"boundary"}. See details.}
+\item{containment}{character. Strategy for selecting H3 cells. Must be one of
+\code{"intersect"} (Default), \code{"centroid"}, \code{"boundary"}, or \code{"covers"}. See details.}
 }
 \value{
 An H3 vector.
@@ -24,12 +24,21 @@ Each list element contains the vector of H3 cells that cover the geometry.
 \details{
 Note, use \code{flatten_h3()} to reduce the list to a single vector.
 
-The \href{https://docs.rs/h3o/0.4.0/h3o/geom/enum.ContainmentMode.html}{Containment Mode} determines if an H3 cell should be returned.
+The selection of H3 cells is determined by the \href{https://docs.rs/h3o/0.4.0/h3o/geom/enum.ContainmentMode.html}{\strong{Containment Mode}}:
 \itemize{
-\item \code{"centroid"} returns every cell whose centroid are contained inside of a polygon. This is the fastest option but may not cover the entire polygon.
-\item \code{"boundary"} this returns the cells which are completely contained by the polygon. Much of a polygon might not be covered using this approach.
-\item \code{"intersect"} ensures that a polygon is entirely covered. If an H3 cell comes in contact with the polygon it will be returned. This is the default.
-\item \code{"contains"} behaves the same as \code{"intersect"}, but also handles the case where the geometry is being covered by a cell without intersecting with its boundaries. In such cases, the covering cell is returned.
+\item \code{"centroid"}: Returns cells whose center point (centroid) falls inside the
+geometry. This is the fastest method but may leave edges of the geometry
+uncovered.
+\item \code{"boundary"}: Returns only cells that are completely contained within the
+geometry. This often leaves the outer perimeter of the geometry uncovered.
+\item \code{"intersect"}: (Default) Returns any cell that touches the geometry (including
+boundary intersections). This ensures the entire geometry is covered,
+but may include cells that are only partially overlapped.
+\item \code{"covers"}: An extension of \code{"intersect"}. Use this when dealing with
+very small geometries. While \code{"intersect"} captures cells that touch the
+geometry's boundary, \code{"covers"} ensures that if a geometry is so small
+that it sits entirely inside a single cell (without touching the cell's
+edges), that covering cell is still returned.
 }
 }
 \examples{

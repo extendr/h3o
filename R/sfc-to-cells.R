@@ -6,17 +6,25 @@
 #' Note, use `flatten_h3()` to reduce the list to a single vector.
 #'
 #' @inheritParams h3_from_points
-#' @param containment default `"intersect"`. Must be one of `"intersect"`,
-#'  `"centroid"`, or `"boundary"`. See details.
+#' @param containment character. Strategy for selecting H3 cells. Must be one of
+#'   `"intersect"` (Default), `"centroid"`, `"boundary"`, or `"covers"`. See details.
 #'
 #' @details
+#' The selection of H3 cells is determined by the [**Containment Mode**](https://docs.rs/h3o/0.4.0/h3o/geom/enum.ContainmentMode.html):
 #'
-#' The [Containment Mode](https://docs.rs/h3o/0.4.0/h3o/geom/enum.ContainmentMode.html) determines if an H3 cell should be returned.
-#'
-#' - `"centroid"` returns every cell whose centroid are contained inside of a polygon. This is the fastest option but may not cover the entire polygon.
-#' - `"boundary"` this returns the cells which are completely contained by the polygon. Much of a polygon might not be covered using this approach.
-#' - `"intersect"` ensures that a polygon is entirely covered. If an H3 cell comes in contact with the polygon it will be returned. This is the default.
-#'- `"contains"` behaves the same as `"intersect"`, but also handles the case where the geometry is being covered by a cell without intersecting with its boundaries. In such cases, the covering cell is returned.
+#' - `"centroid"`: Returns cells whose center point (centroid) falls inside the
+#'   geometry. This is the fastest method but may leave edges of the geometry
+#'   uncovered.
+#' - `"boundary"`: Returns only cells that are completely contained within the
+#'   geometry. This often leaves the outer perimeter of the geometry uncovered.
+#' - `"intersect"`: (Default) Returns any cell that touches the geometry (including
+#'   boundary intersections). This ensures the entire geometry is covered,
+#'   but may include cells that are only partially overlapped.
+#' - `"covers"`: An extension of `"intersect"`. Use this when dealing with
+#'   very small geometries. While `"intersect"` captures cells that touch the
+#'   geometry's boundary, `"covers"` ensures that if a geometry is so small
+#'   that it sits entirely inside a single cell (without touching the cell's
+#'   edges), that covering cell is still returned.
 #'
 #' @examples
 #' if (interactive() && rlang::is_installed("sf")) {
@@ -49,4 +57,3 @@ sfc_to_cells <- function(x, resolution, containment = "intersect") {
   }
   sfc_to_cells_(x, resolution, containment)
 }
-
