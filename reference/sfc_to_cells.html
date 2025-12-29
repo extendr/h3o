@@ -55,8 +55,8 @@ Each list element contains the vector of H3 cells that cover the geometry.</p>
 
 
 <dt id="arg-containment">containment<a class="anchor" aria-label="anchor" href="#arg-containment"></a></dt>
-<dd><p>default <code>"intersect"</code>. Must be one of <code>"intersect"</code>,
-<code>"centroid"</code>, or <code>"boundary"</code>. See details.</p></dd>
+<dd><p>character. Strategy for selecting H3 cells. Must be one of
+<code>"intersect"</code> (Default), <code>"centroid"</code>, <code>"boundary"</code>, or <code>"covers"</code>. See details.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -66,10 +66,19 @@ Each list element contains the vector of H3 cells that cover the geometry.</p>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Note, use <code><a href="H3.html">flatten_h3()</a></code> to reduce the list to a single vector.</p>
-<p>The <a href="https://docs.rs/h3o/0.4.0/h3o/geom/enum.ContainmentMode.html" class="external-link">Containment Mode</a> determines if an H3 cell should be returned.</p><ul><li><p><code>"centroid"</code> returns every cell whose centroid are contained inside of a polygon. This is the fastest option but may not cover the entire polygon.</p></li>
-<li><p><code>"boundary"</code> this returns the cells which are completely contained by the polygon. Much of a polygon might not be covered using this approach.</p></li>
-<li><p><code>"intersect"</code> ensures that a polygon is entirely covered. If an H3 cell comes in contact with the polygon it will be returned. This is the default.</p></li>
-<li><p><code>"contains"</code> behaves the same as <code>"intersect"</code>, but also handles the case where the geometry is being covered by a cell without intersecting with its boundaries. In such cases, the covering cell is returned.</p></li>
+<p>The selection of H3 cells is determined by the <a href="https://docs.rs/h3o/0.4.0/h3o/geom/enum.ContainmentMode.html" class="external-link"><strong>Containment Mode</strong></a>:</p><ul><li><p><code>"centroid"</code>: Returns cells whose center point (centroid) falls inside the
+geometry. This is the fastest method but may leave edges of the geometry
+uncovered.</p></li>
+<li><p><code>"boundary"</code>: Returns only cells that are completely contained within the
+geometry. This often leaves the outer perimeter of the geometry uncovered.</p></li>
+<li><p><code>"intersect"</code>: (Default) Returns any cell that touches the geometry (including
+boundary intersections). This ensures the entire geometry is covered,
+but may include cells that are only partially overlapped.</p></li>
+<li><p><code>"covers"</code>: An extension of <code>"intersect"</code>. Use this when dealing with
+very small geometries. While <code>"intersect"</code> captures cells that touch the
+geometry's boundary, <code>"covers"</code> ensures that if a geometry is so small
+that it sits entirely inside a single cell (without touching the cell's
+edges), that covering cell is still returned.</p></li>
 </ul></div>
 
     <div class="section level2">
@@ -95,7 +104,7 @@ Each list element contains the vector of H3 cells that cover the geometry.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
