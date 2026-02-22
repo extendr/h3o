@@ -13,13 +13,13 @@
 Source:
 [`DESCRIPTION`](https://github.com/extendr/h3o/blob/main/DESCRIPTION)
 
-Parry J (2025). *h3o: H3 Geospatial Indexing System*. R package version
-0.3.0.9000, <https://github.com/extendr/h3o>.
+Parry J (2026). *h3o: H3 Geospatial Indexing System*. R package version
+0.3.1, <https://github.com/extendr/h3o>.
 
     @Manual{,
       title = {h3o: H3 Geospatial Indexing System},
       author = {Josiah Parry},
-      year = {2025},
-      note = {R package version 0.3.0.9000},
+      year = {2026},
+      note = {R package version 0.3.1},
       url = {https://github.com/extendr/h3o},
     }

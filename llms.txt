@@ -285,6 +285,10 @@ bench::mark(
   [`flatten_h3()`](https://extendr.github.io/h3o/reference/H3.md)
   [`is_h3()`](https://extendr.github.io/h3o/reference/H3.md) : Create H3
   Index
+- [`area_km2()`](https://extendr.github.io/h3o/reference/area.md)
+  [`area_m2()`](https://extendr.github.io/h3o/reference/area.md)
+  [`area_rads2()`](https://extendr.github.io/h3o/reference/area.md) :
+  Calculate Area of H3 Cells
 - [`compact_cells()`](https://extendr.github.io/h3o/reference/compact_cells.md)
   [`uncompact_cells()`](https://extendr.github.io/h3o/reference/compact_cells.md)
   : Compact H3 Cells
