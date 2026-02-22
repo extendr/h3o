@@ -1,6 +1,6 @@
 [package]
 name = "h3o"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2018"
 
 [lib]
@@ -9,7 +9,7 @@ crate-type = ["staticlib"]
 [dependencies]
 extendr-api = "0.8.1"
 geo-types = "0.7.9"
-h3o = { version = "0.5.0", features = ["geo"] }
+h3o = { version = "0.6.4", features = ["geo"] }
 rayon = "1.7.0"
 sfconversions = "0.4.0"
 

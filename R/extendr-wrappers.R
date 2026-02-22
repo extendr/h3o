@@ -145,6 +145,12 @@ grid_distance_ <- function(x, y) .Call(wrap__grid_distance_, x, y)
 
 local_ij_ <- function(x, y) .Call(wrap__local_ij_, x, y)
 
+area_km2_ <- function(x) .Call(wrap__area_km2_, x)
+
+area_m2_ <- function(x) .Call(wrap__area_m2_, x)
+
+area_rads2_ <- function(x) .Call(wrap__area_rads2_, x)
+
 H3DEdge <- new.env(parent = emptyenv())
 
 H3DEdge$new <- function(x, y) .Call(wrap__H3DEdge__new, x, y)

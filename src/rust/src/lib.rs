@@ -1,5 +1,6 @@
 use extendr_api::prelude::*;
 
+mod area;
 mod createh3;
 mod edgefns;
 mod fromsf;
@@ -19,5 +20,5 @@ extendr_module! {
     use togeo;
     use edgefns;
     use grid_traversal;
+    use area;
 }
-

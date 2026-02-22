@@ -1,6 +1,6 @@
 # h3o (development version)
 
-# development 
+- New area functions `area_km2()`, `area_m2()`, and `area_rads2()` to calculate the area in kilometers, meters, and radians respectively <https://github.com/extendr/h3o/pull/22> h/t [@espinielli](https://github.com/espinielli)
 
 # h3o 0.3.0
 - Now on CRAN
