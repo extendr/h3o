@@ -7,7 +7,7 @@ edition = "2018"
 crate-type = ["staticlib"]
 
 [dependencies]
-extendr-api = "0.8.1"
+extendr-api = "0.8.2"
 geo-types = "0.7.9"
 h3o = { version = "0.6.4", features = ["geo"] }
 rayon = "1.7.0"
