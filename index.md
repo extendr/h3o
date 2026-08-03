@@ -18,6 +18,7 @@ You can install the release version of
 [h3o](https://github.com/extendr/h3o) from CRAN with:
 
 ``` r
+
 install.packages("h3o")
 ```
 
@@ -25,6 +26,7 @@ Or you can install the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("extendr/h3o")
 ```
@@ -35,6 +37,7 @@ H3 vectors can be created from `POINT` geometry columns (`sfc` objects)
 defined by sf.
 
 ``` r
+
 library(h3o)
 library(dplyr)
 library(sf)
@@ -76,6 +79,7 @@ H3 vectors also have an
 method which allows conversion of H3 cell indexes into sf `POLYGON`s.
 
 ``` r
+
 # replace geometry
 h3_cells <- pnts |>
   mutate(
@@ -95,6 +99,7 @@ H3 cell centroids can be returned using
 object. Otherwise it will return a list of `sfg` (sf geometries).
 
 ``` r
+
 # fetch h3 column
 h3s <- h3_cells[["h3"]]
 
@@ -115,6 +120,7 @@ and
 [`h3_shared_edge_sparse()`](https://extendr.github.io/h3o/reference/edges.md).
 
 ``` r
+
 cell_edges <- h3_edges(h3s[1:3])
 cell_edges
 #> [[1]]
@@ -137,6 +143,7 @@ We’ve created a list of each cell’s edges. We can flatten them using
 [`flatten_edges()`](https://extendr.github.io/h3o/reference/edges.md).
 
 ``` r
+
 cell_edges <- flatten_edges(cell_edges)
 cell_edges
 #> <H3Edge[18]>
@@ -151,6 +158,7 @@ These can be cast to sfc objects using
 [`st_as_sfc()`](https://r-spatial.github.io/sf/reference/st_as_sfc.html).
 
 ``` r
+
 st_as_sfc(cell_edges)
 #> Geometry set for 18 features 
 #> Geometry type: LINESTRING
@@ -170,6 +178,7 @@ Additionally, you can get the vertexes of H3 cell indexes using
 which returns an `sfc_MULTIPOINT`.
 
 ``` r
+
 h3_to_vertexes(h3s)
 #> Geometry set for 100 features 
 #> Geometry type: MULTIPOINT
@@ -191,6 +200,7 @@ Since h3o is written in Rust, it is very fast.
 ### Creating polygons
 
 ``` r
+
 h3_strs <- as.character(h3s)
 bench::mark(
   h3o = st_as_sfc(h3s),
@@ -206,6 +216,7 @@ bench::mark(
 ### Converting polygons to H3 cells:
 
 ``` r
+
 nc <- st_read(system.file("gpkg/nc.gpkg", package = "sf"), quiet = TRUE) |>
   st_transform(4326) |>
   st_geometry()
@@ -225,6 +236,7 @@ bench::mark(
 ### Converting points to cells
 
 ``` r
+
 bench::mark(
   h3o = h3_from_points(pnts$geometry, 3),
   h3jsr = h3jsr::point_to_cell(pnts$geometry, 3),
@@ -240,6 +252,7 @@ bench::mark(
 ### Retrieve edges
 
 ``` r
+
 bench::mark(
   h3o = h3_edges(h3s),
   h3jsr = h3jsr::get_udedges(h3_strs),
@@ -255,6 +268,7 @@ bench::mark(
 ### Get origins and destinations from edges.
 
 ``` r
+
 # get edges for a single location
 eds <- h3_edges(h3s[1])[[1]]
 # strings for h3jsr
