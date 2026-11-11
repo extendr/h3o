@@ -7,7 +7,7 @@
 #' @param x for `h3_from_points()` an object of class `sfc_POINT`. For `h3_from_strings()` a character vector of H3 index IDs. For `h3_from_xy()` a numeric vector of longitudes.
 #' @param resolution an integer indicating the H3 cell resolution. Must be between 0 and 15 inclusive.
 #' @examples
-#' h3_from_xy(-90, 120, 5)
+#' h3_from_xy(-122, 38, 5)
 #'
 #' h3_from_strings("85f29383fffffff")
 #'

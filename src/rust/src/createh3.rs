@@ -56,7 +56,7 @@ fn h3_from_xy_(x: Doubles, y: Doubles, resolution: u8) -> List {
             if x.is_na() || y.is_na() {
                 Robj::from(extendr_api::NULL)
             } else {
-                Robj::from(H3::from(LatLng::new(x.inner(), y.inner()).unwrap().to_cell(reso)))
+                Robj::from(H3::from(LatLng::new(y.inner(), x.inner()).unwrap().to_cell(reso)))
             }
         })
         .collect::<Vec<Robj>>();

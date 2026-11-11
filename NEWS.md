@@ -1,5 +1,7 @@
 # h3o (development version)
 
+- `h3_from_xy()` now treats `x` as longitude and `y` as latitude, as documented. It previously swapped them <https://github.com/extendr/h3o/issues/25>
+
 - New area functions `area_km2()`, `area_m2()`, and `area_rads2()` to calculate the area in kilometers, meters, and radians respectively <https://github.com/extendr/h3o/pull/22> h/t [@espinielli](https://github.com/espinielli)
 
 # h3o 0.3.0

@@ -52,7 +52,7 @@ Create H3 indices from \code{sfc} objects, vectors of x and y coordinates, or H3
 }
 }
 \examples{
-h3_from_xy(-90, 120, 5)
+h3_from_xy(-122, 38, 5)
 
 h3_from_strings("85f29383fffffff")
 
