@@ -2,6 +2,10 @@
 
 ## h3o (development version)
 
+- [`h3_from_xy()`](https://extendr.github.io/h3o/reference/H3.md) now
+  treats `x` as longitude and `y` as latitude, as documented. It
+  previously swapped them <https://github.com/extendr/h3o/issues/25>
+
 - New area functions
   [`area_km2()`](https://extendr.github.io/h3o/reference/area.md),
   [`area_m2()`](https://extendr.github.io/h3o/reference/area.md), and

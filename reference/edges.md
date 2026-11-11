@@ -106,46 +106,46 @@ is_valid_edge(c("115e22da7fffffff", "abcd"))
 # get the origin cell of the edge
 h3_edge_origin(edges)
 #> <H3[6]>
-#> [1] 85e22da7fffffff 85e22da7fffffff 85e22da7fffffff 85e22da7fffffff
-#> [5] 85e22da7fffffff 85e22da7fffffff
+#> [1] 852830c7fffffff 852830c7fffffff 852830c7fffffff 852830c7fffffff
+#> [5] 852830c7fffffff 852830c7fffffff
 
 # get the destination of the edge
 h3_edge_destination(edges)
 #> <H3[6]>
-#> [1] 85e22da7fffffff 85e22da7fffffff 85e22da7fffffff 85e22da7fffffff
-#> [5] 85e22da7fffffff 85e22da7fffffff
+#> [1] 852830c7fffffff 852830c7fffffff 852830c7fffffff 852830c7fffffff
+#> [5] 852830c7fffffff 852830c7fffffff
 
 # get both origin and destination cells
 h3_edge_cells(edges)
 #> [[1]]
 #> <H3[2]>
 #>          origin     destination 
-#> 85e22da7fffffff 85e35ad3fffffff 
+#> 852830c7fffffff 85283013fffffff 
 #> 
 #> [[2]]
 #> <H3[2]>
 #>          origin     destination 
-#> 85e22da7fffffff 85e22daffffffff 
+#> 852830c7fffffff 852830cffffffff 
 #> 
 #> [[3]]
 #> <H3[2]>
 #>          origin     destination 
-#> 85e22da7fffffff 85e35adbfffffff 
+#> 852830c7fffffff 8528301bfffffff 
 #> 
 #> [[4]]
 #> <H3[2]>
 #>          origin     destination 
-#> 85e22da7fffffff 85e22db7fffffff 
+#> 852830c7fffffff 852830d7fffffff 
 #> 
 #> [[5]]
 #> <H3[2]>
 #>          origin     destination 
-#> 85e22da7fffffff 85e35e6bfffffff 
+#> 852830c7fffffff 8528308bfffffff 
 #> 
 #> [[6]]
 #> <H3[2]>
 #>          origin     destination 
-#> 85e22da7fffffff 85e22da3fffffff 
+#> 852830c7fffffff 852830c3fffffff 
 #> 
 
 # create edges from strings
