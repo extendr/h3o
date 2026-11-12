@@ -31,7 +31,7 @@ fn h3_from_points_(x: List, resolution: u8) -> List {
     let res = x.into_iter()
         .map(|(_, robj)| {
             let dbls = Doubles::try_from(robj).unwrap();
-            let ll = LatLng::new(dbls[1].inner(), dbls[0].inner());
+            let ll = LatLng::new(dbls[1].0, dbls[0].0);
 
             match ll {
                 Ok(ll) => Robj::from(H3::from(ll.to_cell(reso))),
@@ -56,7 +56,7 @@ fn h3_from_xy_(x: Doubles, y: Doubles, resolution: u8) -> List {
             if x.is_na() || y.is_na() {
                 Robj::from(extendr_api::NULL)
             } else {
-                Robj::from(H3::from(LatLng::new(y.inner(), x.inner()).unwrap().to_cell(reso)))
+                Robj::from(H3::from(LatLng::new(y.0, x.0).unwrap().to_cell(reso)))
             }
         })
         .collect::<Vec<Robj>>();
