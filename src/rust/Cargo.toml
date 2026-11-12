@@ -7,11 +7,12 @@ edition = "2018"
 crate-type = ["staticlib"]
 
 [dependencies]
-extendr-api = "0.8.2"
+extendr-api = "0.9"
+geo-traits = "0.3"
 geo-types = "0.7.9"
 h3o = { version = "0.6.4", features = ["geo"] }
 rayon = "1.7.0"
-sfconversions = "0.4.0"
+sfconversions = "1.0"
 
 [profile.release]
 lto = true

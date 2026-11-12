@@ -3,7 +3,7 @@ use h3o::{geom::ToGeo, CellIndex, LatLng};
 
 use crate::h3::*;
 
-use sfconversions::Geom;
+use sfconversions::sfg::{SfgMultiPoint, SfgMultiPolygon};
 
 #[extendr]
 fn h3_to_geo_(x: List) -> Robj {
@@ -12,8 +12,7 @@ fn h3_to_geo_(x: List) -> Robj {
         .map(|(_, x)| <&H3>::try_from(&x).unwrap().index)
         .collect::<Vec<CellIndex>>();
     let res = h3_vec.to_geom(true).unwrap();
-    let res = Geom::from(res);
-    Robj::from(res)
+    Robj::from(SfgMultiPolygon::from(res))
 }
 
 #[extendr]
@@ -55,7 +54,7 @@ fn h3_to_vertexes_(x: List) -> List {
                     .map(|p| p.to_geom(true).unwrap())
                     .collect::<Vec<geo_types::Point>>();
                 let mp = geo_types::MultiPoint::new(ps);
-                sfconversions::tosf::to_sfg(Geom::from(mp))
+                Robj::from(SfgMultiPoint::from(mp))
             }
 
         })

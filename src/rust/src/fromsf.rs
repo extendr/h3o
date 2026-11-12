@@ -1,6 +1,7 @@
 use extendr_api::prelude::*;
 
-use sfconversions::fromsf::sfc_to_geometry;
+use geo_traits::to_geo::ToGeoGeometry;
+use sfconversions::sfg::Sfg;
 use h3o::geom::ToCells;
 use h3o::geom::{PolyfillConfig, ContainmentMode};
 
@@ -22,7 +23,7 @@ fn geometry_to_cells(x: Geometry, containment: PolyfillConfig) -> Vec<H3> {
 }
 
 #[extendr]
-fn sfc_to_cells_(x: List, resolution: i32, containment: &str) -> List {
+fn sfc_to_cells_(x: List, resolution: i32, containment: &str) -> extendr_api::Result<List> {
 
     let resolution = match_resolution(resolution as u8);
 
@@ -37,7 +38,17 @@ fn sfc_to_cells_(x: List, resolution: i32, containment: &str) -> List {
     let poly_config = PolyfillConfig::new(resolution)
         .containment_mode(containment_strategy);
 
-    let x = sfc_to_geometry(x);
+    // R objects aren't Send, so convert to geo-types serially first.
+    let x = x
+        .into_iter()
+        .map(|(_, robj)| {
+            if robj.is_null() {
+                Ok(None)
+            } else {
+                Sfg::try_from(robj).map(|sfg| Some(sfg.to_geometry()))
+            }
+        })
+        .collect::<extendr_api::Result<Vec<Option<Geometry>>>>()?;
 
     let res = x.into_par_iter()
         .with_min_len(4096)
@@ -54,7 +65,7 @@ fn sfc_to_cells_(x: List, resolution: i32, containment: &str) -> List {
     })
     .collect::<Vec<List>>();
 
-    List::from_values(res)
+    Ok(List::from_values(res))
 }
 
 extendr_module! {
