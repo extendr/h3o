@@ -14,7 +14,7 @@ fn h3_from_string_(x: Strings) -> List  {
             if strng.is_na() {
                 Robj::from(extendr_api::NULL)
             } else {
-                Robj::from(H3::from(CellIndex::from_str(strng.as_str()).unwrap()))
+                Robj::from(H3::from(CellIndex::from_str(strng.as_ref()).unwrap()))
             }
         })
         .collect::<Vec<Robj>>();

@@ -122,7 +122,7 @@ fn is_valid_edge_(x: Strings) -> Logicals {
         .map(|x| {
             let x_na = x.is_na();
             if !x_na {
-                let edge = DirectedEdgeIndex::from_str(x.as_str());
+                let edge = DirectedEdgeIndex::from_str(x.as_ref());
                 match edge {
                     Ok(_res) => Rbool::from_bool(true),
                     Err(_res) => Rbool::from_bool(false),
@@ -141,7 +141,7 @@ fn h3_edge_from_strings_(x: Strings) -> List {
         .map(|x| {
             let x_na = x.is_na();
             if !x_na {
-                let edge = DirectedEdgeIndex::from_str(x.as_str());
+                let edge = DirectedEdgeIndex::from_str(x.as_ref());
                 match edge {
                     Ok(res) => Robj::from(H3DEdge::from(res)),
                     Err(_res) => Robj::from(extendr_api::NULL),
@@ -343,7 +343,7 @@ fn edges_to_strings(x: List) -> Strings {
             //
             let indx = <&H3DEdge>::try_from(&robj);
             match indx {
-                Ok(indx) => Rstr::from_string(&indx.edge.to_string()),
+                Ok(indx) => Rstr::from(indx.edge.to_string()),
                 Err(_) => Rstr::na(),
             }
         })

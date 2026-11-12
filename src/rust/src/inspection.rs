@@ -94,7 +94,7 @@ fn is_valid_h3(x: Strings) -> Logicals {
                 return Rbool::na()
             }
 
-            Rbool::from(is_valid_h3_(x.as_str()))
+            Rbool::from(is_valid_h3_(x.as_ref()))
         })
         .collect::<Logicals>()
 }
