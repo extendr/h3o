@@ -6,7 +6,8 @@ use std::iter::FromIterator;
 #[extendr]
 fn get_parents_(x: List, resolution: u8) -> List {
     let reso = match_resolution(resolution);
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             if robj.is_null() {
                 Robj::from(extendr_api::NULL)
@@ -29,18 +30,14 @@ fn get_parents_(x: List, resolution: u8) -> List {
 #[extendr]
 fn get_children_(x: List, resolution: u8) -> List {
     let reso = match_resolution(resolution);
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             if robj.is_null() {
-                list!()
-                    .set_class(vctrs_class())
-                    .unwrap()
-                    .clone()
+                list!().set_class(vctrs_class()).unwrap().clone()
             } else {
                 let children = <&H3>::try_from(&robj).unwrap().index.children(reso);
-                let r = children
-                    .map(|child| H3::from(child))
-                    .collect::<Vec<H3>>();
+                let r = children.map(|child| H3::from(child)).collect::<Vec<H3>>();
                 List::from_values(r)
                     .set_class(vctrs_class())
                     .unwrap()
@@ -69,7 +66,8 @@ fn get_children_count_(x: List, resolution: u8) -> Vec<i32> {
 #[extendr]
 fn get_children_center_(x: List, resolution: u8) -> List {
     let reso = match_resolution(resolution);
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             if robj.is_null() {
                 Robj::from(extendr_api::NULL)
@@ -107,7 +105,8 @@ fn get_children_position_(x: List, resolution: u8) -> Integers {
 #[extendr]
 fn get_children_at_(x: List, position: i32, resolution: u8) -> List {
     let reso = match_resolution(resolution);
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             let child = <&H3>::try_from(&robj)
                 .unwrap()
@@ -127,49 +126,40 @@ fn get_children_at_(x: List, position: i32, resolution: u8) -> List {
 }
 
 #[extendr]
-fn compact_cells_(x: List) -> List {
-    let h3_vec = x
+fn compact_cells_(x: List) -> extendr_api::Result<List> {
+    let mut h3_vec = x
         .into_iter()
-        .map(|(_, robj)| <&H3>::try_from(&robj).unwrap().index)
-        .collect::<Vec<CellIndex>>();
+        .map(|(_, robj)| <&H3>::try_from(&robj).map(|h| h.index))
+        .collect::<extendr_api::Result<Vec<CellIndex>>>()?;
 
-    let res = CellIndex::compact(h3_vec)
-        .unwrap()
-        .into_iter()
-        .map(|x| H3::from(x))
-        .collect::<Vec<H3>>();
+    CellIndex::compact(&mut h3_vec).map_err(|e| Error::Other(e.to_string()))?;
 
-    List::from_values(res)
-        .set_class(vctrs_class())
-        .unwrap()
-        .clone()
+    let mut res = List::from_values(h3_vec.into_iter().map(H3::from));
+    res.set_class(vctrs_class())?;
+    Ok(res)
 }
 
 #[extendr]
 fn uncompact_cells_(x: List, resolution: u8) -> List {
     let reso = match_resolution(resolution);
 
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             if robj.is_null() {
-                list!()
-                    .set_class(vctrs_class())
-                    .unwrap()
-                    .clone()
+                list!().set_class(vctrs_class()).unwrap().clone()
             } else {
                 let uncompacted = CellIndex::uncompact(
                     std::iter::once(<&H3>::try_from(&robj).unwrap().index),
                     reso,
                 );
-                let res = uncompacted
-                    .map(|x| H3::from(x))
-                    .collect::<Vec<H3>>();
+                let res = uncompacted.map(|x| H3::from(x)).collect::<Vec<H3>>();
 
                 List::from_values(res)
                     .set_class(vctrs_class())
                     .unwrap()
                     .clone()
-            } 
+            }
         })
         .collect::<Vec<List>>();
 

@@ -1,23 +1,27 @@
 use extendr_api::prelude::*;
-use h3o::{geom::ToGeo, CellIndex, LatLng};
+use h3o::{geom::SolventBuilder, CellIndex, LatLng};
 
 use crate::h3::*;
 
 use sfconversions::sfg::{SfgMultiPoint, SfgMultiPolygon};
 
 #[extendr]
-fn h3_to_geo_(x: List) -> Robj {
+fn h3_to_geo_(x: List) -> extendr_api::Result<Robj> {
     let h3_vec = x
         .into_iter()
-        .map(|(_, x)| <&H3>::try_from(&x).unwrap().index)
-        .collect::<Vec<CellIndex>>();
-    let res = h3_vec.to_geom(true).unwrap();
-    Robj::from(SfgMultiPolygon::from(res))
+        .map(|(_, x)| <&H3>::try_from(&x).map(|h| h.index))
+        .collect::<extendr_api::Result<Vec<CellIndex>>>()?;
+    let res = SolventBuilder::new()
+        .build()
+        .dissolve(h3_vec)
+        .map_err(|e| Error::Other(e.to_string()))?;
+    Ok(Robj::from(SfgMultiPolygon::from(res)))
 }
 
 #[extendr]
 fn h3_to_points_(x: List) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             let idx = <&H3>::try_from(&robj);
 
@@ -38,29 +42,27 @@ fn h3_to_points_(x: List) -> List {
 }
 
 #[extendr]
-fn h3_to_vertexes_(x: List) -> List {
-    let res = x.into_iter()
+fn h3_to_vertexes_(x: List) -> extendr_api::Result<List> {
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
-
             if robj.is_null() {
-                Robj::from(RMatrix::new_matrix(0, 2, |_r, _c| 0))
-                    .set_class(["XY", "MULTIPOINT", "sfg"])
-                    .unwrap()
-                    .clone()
+                let mut empty = Robj::from(RMatrix::new_matrix(0, 2, |_r, _c| 0));
+                empty.set_class(["XY", "MULTIPOINT", "sfg"])?;
+                Ok(empty)
             } else {
-                let vs = <&H3>::try_from(&robj).unwrap().index.vertexes();
-
-                let ps = vs
-                    .map(|p| p.to_geom(true).unwrap())
+                let ps = <&H3>::try_from(&robj)?
+                    .index
+                    .vertexes()
+                    .map(geo_types::Point::from)
                     .collect::<Vec<geo_types::Point>>();
                 let mp = geo_types::MultiPoint::new(ps);
-                Robj::from(SfgMultiPoint::from(mp))
+                Ok(Robj::from(SfgMultiPoint::from(mp)))
             }
-
         })
-        .collect::<Vec<Robj>>();
+        .collect::<extendr_api::Result<Vec<Robj>>>()?;
 
-    List::from_values(res)
+    Ok(List::from_values(res))
 }
 
 extendr_module! {

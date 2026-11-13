@@ -227,25 +227,23 @@ fn get_directed_cells_(x: List) -> List {
 }
 
 #[extendr]
-fn h3_edges_(x: List) -> List {
+fn h3_edges_(x: List) -> extendr_api::Result<List> {
     let res = x
         .into_iter()
         .map(|(_, robj)| {
-            if robj.is_null() {
-                list!().set_class(edge_vctrs()).unwrap().clone()
+            let mut edges = if robj.is_null() {
+                list!()
             } else {
-                let eds = <&H3>::try_from(&robj).unwrap().index.edges();
-                let res = eds.map(|ed| H3DEdge { edge: ed }).collect::<Vec<H3DEdge>>();
-
-                List::from_values(res)
-                    .set_class(edge_vctrs())
-                    .unwrap()
-                    .clone()
-            }
+                let mut eds = <&H3>::try_from(&robj)?.index.edges().collect::<Vec<_>>();
+                eds.sort_unstable();
+                List::from_values(eds.into_iter().map(|ed| H3DEdge { edge: ed }))
+            };
+            edges.set_class(edge_vctrs())?;
+            Ok(edges)
         })
-        .collect::<Vec<List>>();
+        .collect::<extendr_api::Result<Vec<List>>>()?;
 
-    List::from_values(res)
+    Ok(List::from_values(res))
 }
 
 #[extendr]
