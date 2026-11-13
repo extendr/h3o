@@ -8,8 +8,9 @@ use h3o::{CellIndex, LatLng};
 use crate::h3::{vctrs_class, H3};
 
 #[extendr]
-fn h3_from_string_(x: Strings) -> List  {
-    let res = x.into_iter()
+fn h3_from_string_(x: Strings) -> List {
+    let res = x
+        .into_iter()
         .map(|strng| {
             if strng.is_na() {
                 Robj::from(extendr_api::NULL)
@@ -21,14 +22,16 @@ fn h3_from_string_(x: Strings) -> List  {
 
     List::from_values(res)
         .set_class(vctrs_class())
-        .unwrap().clone()
+        .unwrap()
+        .clone()
 }
 
 #[extendr]
 fn h3_from_points_(x: List, resolution: u8) -> List {
     let reso = match_resolution(resolution);
 
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             let dbls = Doubles::try_from(robj).unwrap();
             let ll = LatLng::new(dbls[1].0, dbls[0].0);
@@ -50,7 +53,8 @@ fn h3_from_points_(x: List, resolution: u8) -> List {
 fn h3_from_xy_(x: Doubles, y: Doubles, resolution: u8) -> List {
     let reso = match_resolution(resolution);
 
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .zip(y.iter())
         .map(|(x, y)| {
             if x.is_na() || y.is_na() {
@@ -81,13 +85,17 @@ fn h3_boundary_(x: Robj) -> List {
 
     let m = RMatrix::new_matrix(coords.len(), 2, |r, c| coords[r][c]);
 
-    list![m].set_class(["XY", "POLYGON", "sfg"]).unwrap().clone()
+    list![m]
+        .set_class(["XY", "POLYGON", "sfg"])
+        .unwrap()
+        .clone()
 }
 
 // vectorized but prettier
 #[extendr]
 fn h3_boundaries_(x: List) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             if robj.is_null() {
                 Rfloat::na().into_robj()

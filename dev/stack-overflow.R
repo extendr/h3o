@@ -31,11 +31,10 @@ bench::mark(
 
 bench::mark(
   rust = sf::st_sfc(h3_boundaries_(unlist(sfc_to_cells(g, 5))), crs = 4326),
-  V8 =  h3jsr::cell_to_polygon(unlist(h3jsr::polygon_to_cells(g, 5))),
-  check  = FALSE,
+  V8 = h3jsr::cell_to_polygon(unlist(h3jsr::polygon_to_cells(g, 5))),
+  check = FALSE,
   min_time = 10
 )
 
 x2 <-
-
-plot(x)
+  plot(x)

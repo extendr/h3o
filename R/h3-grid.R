@@ -30,7 +30,7 @@
 #' @export
 #' @rdname grid
 #' @returns
-#' 
+#'
 #' See details.
 grid_disk <- function(x, k = 1, safe = TRUE) {
   stopifnot(is_h3(x))
@@ -82,8 +82,3 @@ grid_local_ij <- function(x, y) {
   stopifnot(is_h3(x), is_h3(y))
   as.data.frame(local_ij_(x, y))
 }
-
-
-
-
-

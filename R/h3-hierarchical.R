@@ -36,8 +36,9 @@
 #' @returns See details.
 get_parents <- function(x, resolution) {
   stopifnot(is_h3(x))
-  if (resolution < 0 || resolution > 15)
+  if (resolution < 0 || resolution > 15) {
     stop("`resolution` must be an integer in range [0, 15]")
+  }
 
   get_parents_(x, resolution)
 }
@@ -46,8 +47,9 @@ get_parents <- function(x, resolution) {
 #' @rdname hierarchy
 get_children <- function(x, resolution) {
   stopifnot(is_h3(x))
-  if (resolution < 0 || resolution > 15)
+  if (resolution < 0 || resolution > 15) {
     stop("`resolution` must be an integer in range [0, 15]")
+  }
   get_children_(x, resolution)
 }
 
@@ -55,8 +57,9 @@ get_children <- function(x, resolution) {
 #' @rdname hierarchy
 get_children_count <- function(x, resolution) {
   stopifnot(is_h3(x))
-  if (resolution < 0 || resolution > 15)
+  if (resolution < 0 || resolution > 15) {
     stop("`resolution` must be an integer in range [0, 15]")
+  }
   get_children_count_(x, resolution)
 }
 
@@ -64,8 +67,9 @@ get_children_count <- function(x, resolution) {
 #' @rdname hierarchy
 get_children_center <- function(x, resolution) {
   stopifnot(is_h3(x))
-  if (resolution < 0 || resolution > 15)
+  if (resolution < 0 || resolution > 15) {
     stop("`resolution` must be an integer in range [0, 15]")
+  }
   get_children_center_(x, resolution)
 }
 
@@ -73,8 +77,9 @@ get_children_center <- function(x, resolution) {
 #' @rdname hierarchy
 get_children_position <- function(x, resolution) {
   stopifnot(is_h3(x))
-  if (resolution < 0 || resolution > 15)
+  if (resolution < 0 || resolution > 15) {
     stop("`resolution` must be an integer in range [0, 15]")
+  }
   get_children_position_(x, resolution)
 }
 
@@ -82,7 +87,8 @@ get_children_position <- function(x, resolution) {
 #' @rdname hierarchy
 get_children_at <- function(x, position, resolution) {
   stopifnot(is_h3(x))
-  if (resolution < 0 || resolution > 15)
+  if (resolution < 0 || resolution > 15) {
     stop("`resolution` must be an integer in range [0, 15]")
+  }
   get_children_at_(x, position, resolution)
 }

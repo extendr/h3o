@@ -1,4 +1,3 @@
-
 #' @export
 #' @rdname H3
 #' @examples

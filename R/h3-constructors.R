@@ -1,4 +1,3 @@
-
 #' Create H3 Index
 #'
 #' Create H3 indices from `sfc` objects, vectors of x and y coordinates, or H3 string IDs.
@@ -37,11 +36,12 @@
 #' - `h3_to_vertexes()`: converts an `H3` vector to an `sfc_MULTIPOINT` object or a list of `MULTIPOINT` objects.
 #' @export
 #' @rdname H3
-#' @returns 
+#' @returns
 #' See details.
 h3_from_xy <- function(x, y, resolution) {
-  if (resolution < 0 || resolution > 15)
+  if (resolution < 0 || resolution > 15) {
     stop("`resolution` must be an integer in range [0, 15]")
+  }
 
   h3_from_xy_(x, y, resolution)
 }
@@ -49,26 +49,29 @@ h3_from_xy <- function(x, y, resolution) {
 #' @export
 #' @rdname H3
 h3_from_points <- function(x, resolution) {
-
-  if (resolution < 0 || resolution > 15)
+  if (resolution < 0 || resolution > 15) {
     stop("`resolution` must be an integer in range [0, 15]")
+  }
 
-  if (!inherits(x, "sfc_POINT"))
+  if (!inherits(x, "sfc_POINT")) {
     stop("`x` must be an object of class `sfc_POINT`")
+  }
 
   x_crs <- attr(x, "crs")
   x_bbox <- sf::st_bbox(x)
 
   if (is.na(x_crs)) {
-    if (any(abs(x_bbox[c("xmin", "xmax")]) > 180) || any(abs(x_bbox[c("ymin", "ymax")]) > 90)) {
+    if (
+      any(abs(x_bbox[c("xmin", "xmax")]) > 180) ||
+        any(abs(x_bbox[c("ymin", "ymax")]) > 90)
+    ) {
       stop("Input must be in EPSG:4326")
-    }  else {
+    } else {
       warning("CRS is missing assuming EPSG:4326")
     }
   }
 
   h3_from_points_(x, resolution)
-
 }
 
 #' @export
