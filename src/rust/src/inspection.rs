@@ -23,14 +23,14 @@ use h3o::CellIndex;
 /// @rdname inspection
 /// @examples
 /// cells_ids <-c(
-///     "85e22da7fffffff", "85e35ad3fffffff", 
-///     "85e22daffffffff", "85e35adbfffffff", 
+///     "85e22da7fffffff", "85e35ad3fffffff",
+///     "85e22daffffffff", "85e35adbfffffff",
 ///     "85e22db7fffffff", "85e35e6bfffffff",
 ///     "85e22da3fffffff"
-///   ) 
-///   
+///   )
+///
 /// cells <- h3o::h3_from_strings(cells_ids)
-/// 
+///
 /// h3_resolution(cells)
 /// h3_base_cell(cells)
 /// is_valid_h3(c("85e22db7fffffff", NA, "oopsies"))
@@ -91,7 +91,7 @@ fn is_valid_h3(x: Strings) -> Logicals {
     x.into_iter()
         .map(|x| {
             if x.is_na() {
-                return Rbool::na()
+                return Rbool::na();
             }
 
             Rbool::from(is_valid_h3_(x.as_ref()))

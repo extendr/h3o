@@ -1,17 +1,19 @@
-use extendr_api::prelude::*;
 use crate::h3::*;
+use extendr_api::prelude::*;
 
 #[extendr]
 fn grid_disk_fast_(x: List, k: u32) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             if robj.is_null() {
                 list!().set_class(vctrs_class()).unwrap().clone()
             } else {
                 let ind = <&H3>::try_from(&robj).unwrap().index;
-                let res = ind.grid_disk_fast(k)
-                    .map(|x| 
-                        // can be null sometimes 
+                let res = ind
+                    .grid_disk_fast(k)
+                    .map(|x|
+                        // can be null sometimes
                         // if it messed up catch it and return null
                         match x {
                             Some(x) => Robj::from(H3::from(x)),
@@ -32,13 +34,15 @@ fn grid_disk_fast_(x: List, k: u32) -> List {
 
 #[extendr]
 fn grid_disk_safe_(x: List, k: u32) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             if robj.is_null() {
                 list!().set_class(vctrs_class()).unwrap().clone()
             } else {
                 let ind = <&H3>::try_from(&robj).unwrap().index;
-                let res = ind.grid_disk_safe(k)
+                let res = ind
+                    .grid_disk_safe(k)
                     .map(|x| H3::from(x))
                     .collect::<Vec<H3>>();
 
@@ -55,7 +59,8 @@ fn grid_disk_safe_(x: List, k: u32) -> List {
 
 #[extendr]
 fn grid_distances_(x: List, k: u32) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             if robj.is_null() {
                 let vc: Vec<u32> = Vec::with_capacity(0);
@@ -71,12 +76,12 @@ fn grid_distances_(x: List, k: u32) -> List {
         .collect::<Vec<Vec<u32>>>();
 
     List::from_values(res)
-
 }
 
 #[extendr]
 fn grid_ring_(x: List, k: u32) -> List {
-    let res = x.into_iter() 
+    let res = x
+        .into_iter()
         .map(|(_, robj)| {
             if robj.is_null() {
                 list!().set_class(vctrs_class()).unwrap().clone()
@@ -97,7 +102,8 @@ fn grid_ring_(x: List, k: u32) -> List {
 
                 List::from_values(r)
                     .set_class(vctrs_class())
-                    .unwrap().clone()
+                    .unwrap()
+                    .clone()
             }
         })
         .collect::<Vec<List>>();
@@ -107,7 +113,8 @@ fn grid_ring_(x: List, k: u32) -> List {
 
 #[extendr]
 fn grid_path_cells_(x: List, y: List) -> List {
-    let res = x.into_iter()
+    let res = x
+        .into_iter()
         .zip(y.into_iter())
         .map(|((_, x), (_, y))| {
             if x.is_null() || y.is_null() {
@@ -127,7 +134,7 @@ fn grid_path_cells_(x: List, y: List) -> List {
                             .collect::<Vec<Robj>>();
 
                         List::from_values(r)
-                        },
+                    }
                     // idk if this is the right way to handle it
                     Err(_path) => list!(),
                 };
@@ -138,7 +145,6 @@ fn grid_path_cells_(x: List, y: List) -> List {
         .collect::<Vec<List>>();
 
     List::from_values(res)
-    
 }
 
 #[extendr]
@@ -203,7 +209,7 @@ fn local_ij_(x: List, y: List) -> List {
                     Ok(res) => {
                         let c = res.coord;
                         (c.i, c.j)
-                    },
+                    }
                     Err(_) => (i32::MIN, i32::MIN),
                 }
             }
